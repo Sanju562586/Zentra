@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* BMW Light Theme: White, Black, Blue */
+    --background: 0 0% 100%;
+    /* Pure White */
+    --foreground: 0 0% 0%;
+    /* Pure Black */
+    --card: 0 0% 98%;
+    /* Very Light Grey */
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 212 100% 45%;
+    /* BMW Blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 212 100% 96%;
+    /* Light Blue Tint */
+    --accent-foreground: 212 100% 35%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 212 100% 45%;
+    --radius: 0.5rem;
+
+    /* Charts */
+    --chart-1: 212 100% 45%;
+    --chart-2: 0 0% 20%;
+    --chart-3: 0 0% 60%;
+    --chart-4: 212 80% 60%;
+    --chart-5: 0 0% 80%;
+  }
+
+  .dark {
+    /* Preserving previous Dark Mode (Black/White/Blue) */
+    --background: 0 0% 0%;
+    /* Pure Black */
+    --foreground: 0 0% 100%;
+    /* Pure White */
+    --card: 0 0% 7%;
+    /* Dark Grey Surface */
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 212 100% 50%;
+    /* Brighter Blue for Dark Mode */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 212 100% 50%;
+
+    /* Charts */
+    --chart-1: 212 100% 50%;
+    --chart-2: 0 0% 80%;
+    --chart-3: 0 0% 40%;
+    --chart-4: 212 70% 40%;
+    --chart-5: 0 0% 60%;
+  }
+
+  /* M-Sport Animated Background (Light Mode Only) */
+  body:not(.dark) {
+    background:
+      radial-gradient(at 0% 0%, hsla(212, 100%, 85%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(350, 89%, 90%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(199, 89%, 85%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(0, 0%, 100%, 1) 0px, transparent 50%);
+    background-size: 150% 150%;
+    animation: gradient-flow 15s ease infinite;
+    background-color: var(--background);
+    /* Fallback */
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
