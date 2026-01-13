@@ -10,7 +10,8 @@ import RevenueChart from "@/components/admin/RevenueChart";
 import ServiceHealth from "@/components/admin/ServiceHealth";
 import { useMetrics } from "@/hooks/useMetrics";
 import { useLogs } from "@/hooks/useLogs";
-import { TrendingUp, Users, DollarSign, Activity, ShoppingCart } from "lucide-react";
+import { TrendingUp, Users, DollarSign, Activity, ShoppingCart, Terminal, TestTube } from "lucide-react";
+import DashboardCard from "@/components/admin/DashboardCard";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -45,16 +46,28 @@ export default function Dashboard() {
         return null; // Rendered persistently below
 
       case "kafka":
-        return <KafkaViewer />;
+        return (
+          <DashboardCard title="Kafka Stream" icon={Terminal} description="Real-time event stream monitoring">
+            <KafkaViewer />
+          </DashboardCard>
+        );
 
       case "traces":
-        return <TraceViewer />;
+        return (
+          <DashboardCard title="Distributed Traces" icon={Activity} description="End-to-end request tracing and spans">
+            <TraceViewer />
+          </DashboardCard>
+        );
 
       case "chaos":
         return <ChaosTesting />;
 
       case "tests":
-        return <TestRunner tests={tests} />;
+        return (
+          <DashboardCard title="System Tests" icon={TestTube} description="Automated integration and resiliency tests">
+            <TestRunner tests={tests} />
+          </DashboardCard>
+        );
 
       default:
         return <div>Select a tab</div>;
@@ -128,10 +141,11 @@ export default function Dashboard() {
             />
           </div>
 
-          <div className="bg-neutral-900 border border-white/10 rounded-xl p-6">
-            <h3 className="text-lg font-bold text-white mb-4">Revenue Trend</h3>
-            <RevenueChart data={metrics?.history} />
-          </div>
+          <DashboardCard title="Revenue Trend">
+            <div className="p-6">
+              <RevenueChart data={metrics?.history} />
+            </div>
+          </DashboardCard>
         </div>
 
         {/* Persistent Logs Viewer */}

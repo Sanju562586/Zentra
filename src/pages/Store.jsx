@@ -91,7 +91,7 @@ export default function Store() {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
 
-      <div className="pt-24 pb-12 px-2 lg:px-4 max-w-[1800px] mx-auto flex gap-6">
+      <div className="pb-12 px-2 lg:px-4 max-w-[1800px] mx-auto flex gap-6">
         {/* Sidebar */}
         <StoreSidebar
           activeCategory={activeCategory}

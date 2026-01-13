@@ -74,6 +74,38 @@ const MOCK_PRODUCTS = [
     { id: 10, title: "Neural Link", price: 5000, category: "Cybernetics", inStock: true, colors: ["Blue"], sizes: ["S"], gender: "Unisex", ageGroup: "Adults", description: "Direct mind-to-cloud upload.", specs: ["10Gbps Uplink", "Thought Control", "Cloud Storage", "Encrypted"], image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=1000" },
 ];
 
+// Mock Orders Data
+const MOCK_ORDERS = [
+    {
+        id: "ORD-9283",
+        date: "2024-03-15",
+        total: 1299,
+        status: "DELIVERED",
+        items: [
+            { name: "Neon Cyber-Deck", quantity: 1, price: 299 },
+            { name: "Quantum Processor", quantity: 1, price: 899 }
+        ]
+    },
+    {
+        id: "ORD-1120",
+        date: "2024-04-02",
+        total: 450,
+        status: "SHIPPED",
+        items: [
+            { name: "Gravity Boots", quantity: 1, price: 450 }
+        ]
+    },
+    {
+        id: "ORD-3391",
+        date: "2024-04-10",
+        total: 150,
+        status: "PROCESSING",
+        items: [
+            { name: "Holo-Visor", quantity: 1, price: 150 }
+        ]
+    }
+];
+
 // Add response interceptor for mocking
 api.interceptors.response.use(
     (response) => response,
@@ -82,7 +114,14 @@ api.interceptors.response.use(
         console.warn("API Error, falling back to mock data:", error.config.url);
 
         // Simulate network delay
-        await new Promise(r => setTimeout(r, 600));
+        // Simulate network delay - Removed for zero latency
+
+        // Mock User Orders List
+        if (error.config.url?.includes("/orders/user")) {
+            return {
+                data: MOCK_ORDERS
+            };
+        }
 
         if (error.config.url?.includes("/products")) {
             if (error.config.url.split('/').length > 2) {
@@ -150,7 +189,7 @@ api.interceptors.response.use(
 
             return {
                 data: Array.from({ length: 5 }, (_, i) => ({
-                    id: Date.now() + i,
+                    id: `${Date.now()}-${i}-${Math.random().toString(36).substr(2, 9)}`,
                     time: new Date().toLocaleTimeString(),
                     type: types[Math.floor(Math.random() * types.length)],
                     service: services[Math.floor(Math.random() * services.length)],

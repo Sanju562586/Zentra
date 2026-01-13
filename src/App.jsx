@@ -10,6 +10,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const OrderStatus = lazy(() => import("./pages/OrderStatus"));
 const Checkout = lazy(() => import("./pages/Checkout"));
+const MyOrders = lazy(() => import("./pages/MyOrders"));
 
 // Loading Component
 const PageLoader = () => (
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/store/:id" element={<PageWrapper><ProductDetail /></PageWrapper>} />
             <Route path="/checkout" element={<PageWrapper><Checkout /></PageWrapper>} />
             <Route path="/orders/:id" element={<PageWrapper><OrderStatus /></PageWrapper>} />
+            <Route path="/my-orders" element={<PageWrapper><MyOrders /></PageWrapper>} />
             <Route path="/admin" element={<PageWrapper><Dashboard /></PageWrapper>} />
           </Routes>
         </Suspense>

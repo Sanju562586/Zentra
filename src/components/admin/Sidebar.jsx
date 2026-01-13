@@ -43,7 +43,8 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, onClose }) {
                                 <button
                                     onClick={() => {
                                         setActiveTab(item.id);
-                                        if (onClose) onClose();
+                                        // Only close on mobile (controlled by parent layout if needed, but for now we keep it persistent on desktop)
+                                        if (window.innerWidth < 768 && onClose) onClose();
                                     }}
                                     className={`flex items-center w-full p-2 rounded-lg group transition-all duration-300 ${isActive
                                         ? "bg-gradient-to-r from-[hsl(222,47%,11%)] via-[hsl(199,89%,48%)] to-[hsl(350,89%,60%)] text-white shadow-lg shadow-blue-500/20 dark:bg-none dark:bg-primary dark:text-primary-foreground"

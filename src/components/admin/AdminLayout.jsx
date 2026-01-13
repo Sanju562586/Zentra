@@ -31,7 +31,7 @@ export default function AdminLayout({ children, activeTab, setActiveTab }) {
                 <button
                     onClick={() => setSidebarOpen(true)}
                     type="button"
-                    className="fixed top-24 left-4 z-50 p-2 bg-background/95 backdrop-blur border border-border rounded-lg shadow-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                    className="fixed top-20 left-4 z-50 p-2 bg-background/95 backdrop-blur border border-border rounded-lg shadow-md hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                 >
                     <Menu className="w-6 h-6" />
                 </button>
@@ -54,7 +54,7 @@ export default function AdminLayout({ children, activeTab, setActiveTab }) {
             />
 
             {/* Main Content */}
-            <div className={`p-4 pt-24 transition-all duration-300 ${sidebarOpen ? "md:ml-[18rem]" : "md:ml-0"}`}>
+            <div className={`p-4 transition-all duration-300 ${sidebarOpen ? "md:ml-[18rem]" : "md:ml-0"}`}>
                 {children}
             </div>
         </div>
