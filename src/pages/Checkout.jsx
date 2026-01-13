@@ -28,12 +28,20 @@ export default function Checkout() {
 
     const handlePlaceOrder = () => {
         setIsProcessing(true);
-        setTimeout(() => {
-            setIsProcessing(false);
-            clearCart();
-            alert("Order Placed Successfully! (Mock)");
-            navigate("/store");
-        }, 2000);
+        import("@/services/api").then(({ default: api }) => {
+            api.post("/orders", { items, address: selectedAddress, payment: paymentMethod })
+                .then(() => {
+                    setIsProcessing(false);
+                    clearCart();
+                    alert("Order Placed Successfully!");
+                    navigate("/store");
+                })
+                .catch((err) => {
+                    setIsProcessing(false);
+                    console.error("Order failed", err);
+                    alert("Failed to place order. Please try again.");
+                });
+        });
     };
 
     if (items.length === 0) return null;

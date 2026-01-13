@@ -14,6 +14,12 @@ const MOCK_PRODUCTS = [
         id: 1,
         title: "Neon Cyber-Decks",
         price: 299,
+        category: "Gadgets",
+        inStock: true,
+        colors: ["Red", "Blue", "Black"],
+        sizes: ["M", "L"],
+        gender: "Unisex",
+        ageGroup: "Adults",
         description: "Holographic interface with mechanical feedback. Perfect for netrunners.",
         specs: ["Holographic Display", "Tactile Feedback", "5TB Storage", "Neural Link Ready"],
         image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1000",
@@ -22,6 +28,12 @@ const MOCK_PRODUCTS = [
         id: 2,
         title: "Quantum Processor",
         price: 899,
+        category: "Hardware",
+        inStock: true,
+        colors: ["Black", "White"],
+        sizes: ["S"],
+        gender: "Unisex",
+        ageGroup: "Adults",
         description: "Next-gen computing power for AI workloads. Capable of 1000 Qubits.",
         specs: ["1000 Qubits", "Zero Latency", "Supercooled", "AI Optimized"],
         image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=1000",
@@ -30,6 +42,12 @@ const MOCK_PRODUCTS = [
         id: 3,
         title: "Neural Interface",
         price: 599,
+        category: "Cybernetics",
+        inStock: false,
+        colors: ["White"],
+        sizes: ["S", "M", "L", "XL"],
+        gender: "Unisex",
+        ageGroup: "Adults",
         description: "Direct brain-computer connection kit. Experience the web with your mind.",
         specs: ["Wireless", "Low Latency", "Biometric Security", "FDA Approved"],
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
@@ -38,10 +56,22 @@ const MOCK_PRODUCTS = [
         id: 4,
         title: "Bot Assistant",
         price: 1200,
+        category: "Gadgets",
+        inStock: true,
+        colors: ["White", "Blue"],
+        sizes: ["M"],
+        gender: "Unisex",
+        ageGroup: "Kids",
         description: "Autonomous helper droid for daily tasks. Runs on fusion cells.",
         specs: ["Autonomous", "Voice Control", "Fusion Power", "Multi-terrain"],
         image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000",
     },
+    { id: 5, title: "Holo-Visor", price: 150, category: "Accessories", inStock: true, colors: ["Red", "Blue", "Green"], sizes: ["S", "M", "L"], gender: "Unisex", ageGroup: "Kids", description: "Augmented reality heads-up display.", specs: ["AR Overlay", "Gesture Control", "12hr Battery", "Lightweight"], image: "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?auto=format&fit=crop&q=80&w=1000" },
+    { id: 6, title: "Gravity Boots", price: 450, category: "Accessories", inStock: true, colors: ["Black", "White"], sizes: ["M", "L", "XL"], gender: "Unisex", ageGroup: "Adults", description: "Magnetic levitation footwear.", specs: ["MagLev Tech", "Impact Absorption", "Auto-Lacing", "Waterproof"], image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000" },
+    { id: 7, title: "Plasma Cutter", price: 700, category: "Gadgets", inStock: false, colors: ["Red", "Black"], sizes: ["L"], gender: "Men", ageGroup: "Adults", description: "Industrial grade energy tool.", specs: ["Plasma Arc", "Safety Lock", "Rechargeable", "Heavy Duty"], image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
+    { id: 8, title: "Fusion Battery", price: 120, category: "Hardware", inStock: true, colors: ["Green"], sizes: ["S"], gender: "Unisex", ageGroup: "Adults", description: "Infinite power source.", specs: ["Cold Fusion", "Universal Fit", "Zero Emissions", "100 Year Life"], image: "https://images.unsplash.com/photo-1618172193763-c511deb635ca?auto=format&fit=crop&q=80&w=1000" },
+    { id: 9, title: "Cyber-Pet", price: 2000, category: "Gadgets", inStock: true, colors: ["White", "Purple"], sizes: ["S"], gender: "Kids", ageGroup: "Kids", description: "Loyal robotic companion.", specs: ["AI Learning", "Voice Rec", "Emotion Engine", "Hypoallergenic"], image: "https://images.unsplash.com/photo-1534809027769-b00d750a6bac?auto=format&fit=crop&q=80&w=1000" },
+    { id: 10, title: "Neural Link", price: 5000, category: "Cybernetics", inStock: true, colors: ["Blue"], sizes: ["S"], gender: "Unisex", ageGroup: "Adults", description: "Direct mind-to-cloud upload.", specs: ["10Gbps Uplink", "Thought Control", "Cloud Storage", "Encrypted"], image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=1000" },
 ];
 
 // Add response interceptor for mocking
@@ -177,6 +207,34 @@ api.interceptors.response.use(
                         { name: "Inventory Reserved", duration: 180, status: "SUCCESS" },
                         { name: "Order Confirmed", duration: 50, status: "SUCCESS" }
                     ]
+                }
+            };
+        }
+
+        // Mock Order Placement
+        if (error.config.url?.includes("/orders") && error.config.method === 'post') {
+            return {
+                data: {
+                    success: true,
+                    orderId: `ORD-${Math.floor(Math.random() * 10000)}`,
+                    message: "Order placed successfully (Mock)"
+                }
+            };
+        }
+
+        // Mock Login
+        if (error.config.url?.includes("/auth/login") && error.config.method === 'post') {
+            const { email } = JSON.parse(error.config.data);
+            return {
+                data: {
+                    success: true,
+                    user: {
+                        id: 1,
+                        name: "Demo User",
+                        email: email,
+                        role: "admin"
+                    },
+                    token: "mock-jwt-token-123456"
                 }
             };
         }

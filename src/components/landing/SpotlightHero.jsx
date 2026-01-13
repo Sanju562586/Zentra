@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import Spotlight from "../aceternity/Spotlight";
@@ -55,22 +56,26 @@ export default function SpotlightHero() {
         {/* CTA buttons */}
         <div className="flex flex-col md:flex-row gap-6 justify-center pt-8 w-full max-w-sm mx-auto md:max-w-none">
           <Magnetic>
-            <Button
-              size="lg"
-              className="w-full md:w-auto px-8 h-12 text-lg rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all bg-gradient-to-r from-[hsl(222,47%,11%)] to-[hsl(199,89%,48%)] text-white border-0"
-            >
-              Try the Store
-            </Button>
+            <Link to="/store" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                className="w-full px-8 h-12 text-lg rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all bg-gradient-to-r from-[hsl(222,47%,11%)] to-[hsl(199,89%,48%)] text-white border-0"
+              >
+                Try the Store
+              </Button>
+            </Link>
           </Magnetic>
 
           <Magnetic>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full md:w-auto px-8 h-12 text-lg rounded-full border-2 border-[hsl(222,47%,11%)]/10 hover:bg-[hsl(222,47%,11%)]/5 hover:border-[hsl(222,47%,11%)]/30 text-foreground"
-            >
-              View Admin Dashboard
-            </Button>
+            <Link to="/admin" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full px-8 h-12 text-lg rounded-full border-2 border-[hsl(222,47%,11%)]/10 hover:bg-[hsl(222,47%,11%)]/5 hover:border-[hsl(222,47%,11%)]/30 text-foreground"
+              >
+                View Admin Dashboard
+              </Button>
+            </Link>
           </Magnetic>
         </div>
 

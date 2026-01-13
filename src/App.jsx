@@ -22,12 +22,14 @@ const PageLoader = () => (
 );
 
 import { ThemeProvider } from "./components/common/ThemeProvider";
+import Cart from "./components/customer/Cart";
 
 export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
         <Header />
+        <Cart />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<PageWrapper><Landing /></PageWrapper>} />
